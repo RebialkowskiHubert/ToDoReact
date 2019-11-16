@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class ToDoList extends Component {
+    state = {
+      tasks: this.props.tasks,
+      draft: ''
+    }
+
+    updateDraft = event => {
+      this.setState({draft: event.target.value});
+    }
+
+    addToDo = () => {
+      const list = this.state.tasks;
+      list.push(this.state.draft);
+
+      this.setState({tasks: list, draft: ''});
+    }
+
+    render() {
+      return (
+        <div>
+          <h1>{this.props.title}</h1>
+
+          {this.props.tasks.map(task => <p>{task}</p>)}
+
+          <input onChange={this.updateDraft} value={this.state.draft}/>
+
+          <button onClick={this.addToDo}>Dodaj</button>
+        </div>
+      )
+  }
+}
+
+class App extends Component {
+    myTasks = ['wtf', 'fff'];
+
+    render() {
+    return (
+      <div>
+        <ToDoList title="Moje obowiązki" tasks={this.myTasks} />
+      </div>
+    )
+  }
 }
 
 export default App;
