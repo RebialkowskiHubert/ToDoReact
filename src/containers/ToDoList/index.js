@@ -1,44 +1,59 @@
 import React, { Component } from 'react';
 import ToDoItem from '../../components/ToDoItem/index';
 import NewTodoForm from '../../components/NewTodoForm/index';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  background: #2B2E39;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 600px;
+  padding: 14px;
+  border-radius: 14px;
+  margin-top: 14px;
+`;
+
+const Header = styled.h1`
+  color: #FFF;
+`;
 
 class ToDoList extends Component {
-    static defaultProps = {
-      tasks: [
-        {text: 'wtf', done: true}, 
-        {text: 'fff', done: false}
-      ],
-      title: 'Moje obowiązki'
-    }
+  static defaultProps = {
+    tasks: [
+      {text: 'wtf', done: true}, 
+      {text: 'fff', done: false}
+    ],
+    title: 'Moje obowiązki'
+  }
 
-    state = {
-      tasks: this.props.tasks,
-      draft: ''
-    }
+  state = {
+    tasks: this.props.tasks,
+    draft: ''
+  }
 
-    updateDraft = event => {
-      this.setState({draft: event.target.value});
-    }
+  updateDraft = event => {
+    this.setState({draft: event.target.value});
+  }
 
-    addToDo = () => {
-        const { tasks, draft } = this.state;
+  addToDo = () => {
+    const { tasks, draft } = this.state;
 
-        const list = tasks;
-        list.push({text: draft, done: false});
+    const list = tasks;
+    list.push({text: draft, done: false});
 
-        this.setState({tasks: list, draft: ''});
-    }
+    this.setState({tasks: list, draft: ''});
+  }
 
-    render() {
-        return (
-            <div>
-                <h1>{this.props.title}</h1>
+  render() {
+    return (
+      <Container>
+        <Header>{this.props.title}</Header>
 
-                {this.props.tasks.map(task => <ToDoItem text={task.text} done={task.done}/>)}
+        {this.props.tasks.map(task => <ToDoItem text={task.text} done={task.done}/>)}
 
-                <NewTodoForm onSubmit={this.addToDo} onChange={this.updateDraft} draft={this.draft} />
-            </div>
-      )
+        <NewTodoForm onSubmit={this.addToDo} onChange={this.updateDraft} draft={this.draft} />
+      </Container>
+    )
   }
 }
 
