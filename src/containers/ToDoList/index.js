@@ -23,11 +23,11 @@ class ToDoList extends Component {
     const car = await CarsApi.getAll('VF3YDDMAC11179894');
     console.log(car.Results[0].Make);
 
-    const { tasks, draft } = this.state;
+    const { tasks } = this.state;
 
     const list = tasks;
     list.push({text: car.Results[0].Make, done: false});
-    this.setState({tasks: list, draft: ''});
+    this.setState({tasks: list});
   }
 
   static defaultProps = {
