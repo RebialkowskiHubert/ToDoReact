@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ToDoItem from '../../components/ToDoItem/index';
 import NewTodoForm from '../../components/NewTodoForm/index';
 import styled from 'styled-components';
+import * as CarsApi from '../../helpers/carsApi';
 
 const Container = styled.div`
   background: #2B2E39;
@@ -18,10 +19,9 @@ const Header = styled.h1`
 `;
 
 class ToDoList extends Component {
-  componentDidMount = () => {
-   fetch('https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/VF3YDDMAC11179894?format=json')
-    .then(resp => resp.json())
-    .then(json => console.log(json));
+  componentDidMount = async() => {
+    const car = await CarsApi.getAll('VF3YDDMAC11179894');
+    this.setState({tasks: car});
   }
 
   static defaultProps = {
