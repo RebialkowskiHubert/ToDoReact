@@ -21,7 +21,13 @@ const Header = styled.h1`
 class ToDoList extends Component {
   componentDidMount = async() => {
     const car = await CarsApi.getAll('VF3YDDMAC11179894');
-    this.setState({tasks: car});
+    console.log(car.Results[0].Make);
+
+    const { tasks, draft } = this.state;
+
+    const list = tasks;
+    list.push({text: car.Results[0].Make, done: false});
+    this.setState({tasks: list, draft: ''});
   }
 
   static defaultProps = {
