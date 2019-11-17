@@ -18,11 +18,14 @@ const Header = styled.h1`
 `;
 
 class ToDoList extends Component {
+  componentDidMount = () => {
+   fetch('https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/VF3YDDMAC11179894?format=json')
+    .then(resp => resp.json())
+    .then(json => console.log(json));
+  }
+
   static defaultProps = {
-    tasks: [
-      {text: 'wtf', done: true}, 
-      {text: 'fff', done: false}
-    ],
+    tasks: [],
     title: 'Moje obowiązki'
   }
 
