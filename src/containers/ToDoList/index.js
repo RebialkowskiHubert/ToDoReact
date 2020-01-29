@@ -20,7 +20,7 @@ const Header = styled.h1`
 
 class ToDoList extends Component {
   componentDidMount = async() => {
-    const car = await CarsApi.getAll('VF3YDDMAC11179894');
+    const car = await CarsApi.get('VF3YDDMAC11179894');
     console.log(car.Results[0].Make);
 
     const { tasks } = this.state;

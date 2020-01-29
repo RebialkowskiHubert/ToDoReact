@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+const StyledLink = styled(Link)`
+    color: palevioletred;
+    text-decoration: none;
+    margin-left: 5px;
+
+    &:hover {
+        color: #fff;
+    }
+`;
 
 const Item = styled.div`
     background: #343744;
@@ -25,11 +36,12 @@ class ToDoItem extends Component {
     }
 
     render() {
-        const { text } = this.props;
+        const { text, id } = this.props;
 
         return (
         <Item onClick={this.toggleDone} done={this.state.done}>
             {text}
+            <StyledLink to={`/todo_items/${id}`}>Edytuj</StyledLink>
         </Item>
         )
     }

@@ -1,7 +1,7 @@
 import { carsApiUrl } from './routes';
 import * as api from './api';
 
-export const getAll = vin =>
+export const get = vin =>
     api.get(carsApiUrl(vin));
 
 export const create = params => {
